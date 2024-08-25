@@ -8,7 +8,11 @@ pragma solidity ^0.8.19;
 * @dev Implements Chainlint VRFv2.5
 */
 
+
 contract Raffle {
+    /** Errors */
+    error Raffle__NotEnouughETHToEnterRaffle();
+
     uint256 private immutable i_entranceFee;
 
     constructor(uint256 entranceFee) {
@@ -16,7 +20,9 @@ contract Raffle {
     }
 
     function enterRaffle() public payable {
-
+        if(msg.value < i_entranceFee) {
+            revert Raffle__NotEnouughETHToEnterRaffle();
+        }
     }
 
     function pickWinner() public {}
