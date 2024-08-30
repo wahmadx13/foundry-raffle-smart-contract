@@ -134,12 +134,12 @@ abstract contract Raffle is VRFConsumerBaseV2Plus {
                 )
             });
         // Get our random number
-        uint256 requestId = s_vrfCoordinator.requestRandomWords(request);
+        s_vrfCoordinator.requestRandomWords(request);
     }
 
     // CEI: Checks, Effects, Interactions Pattern
     function fulfillRandomWords(
-        uint256 requestId,
+        uint256 /* requestId */,
         uint256[] calldata randomWords
     ) internal override {
         // Checks
