@@ -10,7 +10,7 @@ import {VRFV2PlusClient} from "@chainlink/contracts/src/v0.8/vrf/dev/libraries/V
  * @notice This contract allows users to participate in a simple raffle.
  * @dev Implements Chainlint VRFv2.5
  */
-abstract contract Raffle is VRFConsumerBaseV2Plus {
+contract Raffle is VRFConsumerBaseV2Plus {
     /**
      * Errors
      */

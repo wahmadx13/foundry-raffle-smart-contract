@@ -23,8 +23,8 @@ contract HelperConfig is CodeConstants, Script {
         uint256 interval;
         address vrfCoordinator;
         bytes32 gasLane;
-        uint256 callbackGasLimit;
         uint256 subscriptionId;
+        uint32 callbackGasLimit;
     }
 
     NetworkConfig public localNetworkConfig;
@@ -46,6 +46,10 @@ contract HelperConfig is CodeConstants, Script {
         }
     }
 
+    function getConfig() public returns (NetworkConfig memory) {
+        return getConfigByChainId(block.chainid);
+    }
+
     function getSepoliaEthConfig() public pure returns (NetworkConfig memory) {
         return
             NetworkConfig({
@@ -65,7 +69,7 @@ contract HelperConfig is CodeConstants, Script {
         }
 
         // Deploy
-        vmSafe.startBroadcast();
+        vm.startBroadcast();
 
         VRFCoordinatorV2_5Mock vrfCoordinatorMock = new VRFCoordinatorV2_5Mock(
             MOCK_BASE_FEE,
@@ -73,7 +77,7 @@ contract HelperConfig is CodeConstants, Script {
             MOCK_WEI_PER_UNIT_LINK
         );
 
-        vmSafe.stopBroadcast();
+        vm.stopBroadcast();
 
         localNetworkConfig = NetworkConfig({
             entranceFee: 0.1 ether,
