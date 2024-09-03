@@ -2,7 +2,12 @@
 src = "src"
 out = "out"
 libs = ["lib"]
-remappings = ['@solmate=lib/solmate/src/']
+remappings = []
+
+fs_permissions = [
+    {access = "read", path = "./broadcast"},
+    {access = "read", path = "./reports"}
+]
 
 [etherscan]
 mainnet = { key = "${ETHERSCAN_API_KEY}" }
