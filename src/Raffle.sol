@@ -14,7 +14,7 @@ contract Raffle is VRFConsumerBaseV2Plus {
     /**
      * Errors
      */
-    error Raffle__NotEnouughETHToEnterRaffle();
+    error Raffle__NotEnoughETHToEnterRaffle();
     error Raffle__TransferFailed();
     error Raffle__RaffleNotOpen();
     error Raffle__UpkeepNotNeeded(
@@ -73,7 +73,7 @@ contract Raffle is VRFConsumerBaseV2Plus {
 
     function enterRaffle() external payable {
         if (msg.value < i_entranceFee) {
-            revert Raffle__NotEnouughETHToEnterRaffle();
+            revert Raffle__NotEnoughETHToEnterRaffle();
         }
 
         if (s_raffleState != RaffleState.OPEN) {
@@ -171,5 +171,9 @@ contract Raffle is VRFConsumerBaseV2Plus {
 
     function getRaffleState() external view returns (RaffleState) {
         return s_raffleState;
+    }
+
+    function getPlayer(uint256 indexOfPlayer) external view returns (address) {
+        return s_players[indexOfPlayer];
     }
 }
